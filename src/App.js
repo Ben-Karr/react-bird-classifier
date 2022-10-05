@@ -1,7 +1,7 @@
 import FileUpload from './components/FileUpload'
 import React from 'react'
 
-const API = "http://127.0.0.1:8000/"
+const API = "https://bird-classifier-api.herokuapp.com/"
 
 export default function App(){
     const [image, setImage] = React.useState();
