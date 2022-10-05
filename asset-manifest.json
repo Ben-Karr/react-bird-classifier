@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-bird-classifier/static/css/main.dbcf9c56.css",
-    "main.js": "/react-bird-classifier/static/js/main.fefe9664.js",
+    "main.js": "/react-bird-classifier/static/js/main.ecbec3b2.js",
     "index.html": "/react-bird-classifier/index.html",
     "main.dbcf9c56.css.map": "/react-bird-classifier/static/css/main.dbcf9c56.css.map",
-    "main.fefe9664.js.map": "/react-bird-classifier/static/js/main.fefe9664.js.map"
+    "main.ecbec3b2.js.map": "/react-bird-classifier/static/js/main.ecbec3b2.js.map"
   },
   "entrypoints": [
     "static/css/main.dbcf9c56.css",
-    "static/js/main.fefe9664.js"
+    "static/js/main.ecbec3b2.js"
   ]
 }
