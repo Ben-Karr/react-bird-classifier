@@ -1,6 +1,8 @@
 import FileUpload from './components/FileUpload'
 import React from 'react'
 
+const API = "http://127.0.0.1:8000/"
+
 export default function App(){
     const [image, setImage] = React.useState();
     const [preview, setPreview] = React.useState();
@@ -19,16 +21,22 @@ export default function App(){
     }, [image]);
 
     function predict() {
-        fetch("https://hf.space/embed/benkarr/bird-classifier/+/api/predict", {
-            method: "POST",
-            body: JSON.stringify({data: [preview]}),
-            headers: {"Content-Type": "application/json"}
+        const formData = new FormData();
+        formData.append(
+            "file",
+            image,
+            image.name
+        );
+        const requestOptions = {
+            method: 'POST',
+            body: formData
+        };
+
+        fetch(API, requestOptions)
+        .then(res => res.json())
+        .then(res => {
+            setPredictions(res);
         })
-        .then((res) => res.json())
-        .then( data => {
-            console.log(data.data[0]);
-            setPredictions(data.data[0]);
-        });
     }
 
     function clear() {
@@ -46,7 +54,7 @@ export default function App(){
             <p>Upload a photo of a bird and check which kind it is.</p>
             <div>
                 <br/>
-                {preview ? <img src={preview} className="content" onClick={clear}/> : <FileUpload image={image} setImage={setImage}/>}
+                {preview ? <img alt="preview" src={preview} className="content" onClick={clear}/> : <FileUpload image={image} setImage={setImage}/>}
                 <div className="predict--card content">
                     {preview && <button onClick={clickHandler}>{predictions ? "Clear" : "Predict"}</button>}
                 </div>
@@ -57,7 +65,7 @@ export default function App(){
                             <h4> The models results:</h4>
                             <div className="results--list">
                                 <ul>
-                                    {predictions.confidences.map(item => <li key={item.label}>{item.label}: {(item.confidence*100).toFixed(2)}%</li>)}
+                                    {Object.keys(predictions.confidences).map(label => <li key={label}>{label}: {(predictions.confidences[label]*100).toFixed(2)}%</li>)}
                                 </ul>
                             </div>
                         </div>
